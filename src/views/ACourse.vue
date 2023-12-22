@@ -16,7 +16,7 @@
         <label>Course Description:</label>
         <textarea v-model="courseDetails.description"></textarea>
       </div>
-      <button type="button" @click="updateCourseDetails">Update Course</button>
+      <button type="button" :disabled="exceedsGroupLimit" @click="updateCourseDetails">Update Course</button>
     </form>
   </div>
 </template>
@@ -29,6 +29,11 @@ export default {
     return {
       courseDetails: {}
     };
+  },
+  computed: {
+    exceedsGroupLimit() {
+      return this.courseDetails.studentsnumbers > this.courseDetails.groupsnumbers * 30;
+    }
   },
   methods: {
     async fetchCourseData() {

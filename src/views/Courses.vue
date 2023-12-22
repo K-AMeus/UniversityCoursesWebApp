@@ -2,39 +2,37 @@
   <div>
     <h3> Courses </h3>
     <div class="container">
-      <table>
-        <tr>
-          <th>Course name</th>
-          <th>code</th>
-          <th>ECTS</th>
-          <th>Max No. of students</th>
-          <th>No. of groups:</th>
-        </tr>
-        <tr class="item" v-for="course in courses" :key="course.id">
-          <td>{{ course.coursename }} </td>
-          <td>
-            <router-link :to="{ name: 'ACourse', params: { id: course.id } }">
-              {{ course.coursecode }}
-            </router-link>
-          </td>
-          <td>{{ course.courseects }} </td>
-          <td>{{ course.studentsnumbers }} </td>
-          <td>{{ course.groupsnumbers }}</td>
-
-
-        </tr>
-      </table>
+      <div v-for="course in courses" :key="course.id" class="course-row">
+        <div class="course-column">
+          <div class="column-title">Course name:</div>
+          <div>{{ course.coursename }}</div>
+        </div>
+        <div class="course-column">
+          <div class="column-title">Code:</div>
+          <router-link :to="{ name: 'ACourse', params: { id: course.id } }">
+            {{ course.coursecode }}
+          </router-link>
+        </div>
+        <div class="course-column">
+          <div class="column-title">ECTS:</div>
+          <div>{{ course.courseects }}</div>
+        </div>
+        <div class="course-column">
+          <div class="column-title">Max No. of students:</div>
+          <div>{{ course.studentsnumbers }}</div>
+        </div>
+        <div class="course-column">
+          <div class="column-title">No. of groups:</div>
+          <div>{{ course.groupsnumbers }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "Courses",
-  components: {
-
-  },
   data() {
     return {
       courses: [],
@@ -50,7 +48,6 @@ export default {
   },
   mounted() {
     this.fetchRecords();
-    console.log("mounted");
   }
 };
 </script>
@@ -61,33 +58,32 @@ h3 {
   color: rgb(8, 110, 110);
 }
 
-h1 {
-  font-size: 20px;
-}
-
-th {
-  background: rgb(116, 111, 156);
-}
-
-td {
-  background: rgb(116, 111, 156);
-}
-
-th,
-td {
-  font-size: 15px;
-  margin-bottom: 5px;
-  padding: 8px 10px;
-}
-
 .container {
-  background: #d5d7d8;
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
-  padding: 10px 20px;
   margin: auto;
   width: 90%;
+}
+
+.course-row {
+  background: #6073b3;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}</style>
+  justify-content: space-around;
+  align-items: center;
+}
+
+.course-column {
+  flex: 1;
+  padding: 5px;
+  font-size: 15px;
+  color: black;
+  text-align: center;
+}
+
+.column-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+</style>
