@@ -13,10 +13,16 @@
           </tr>
           <tr class="item" v-for="course in courses" :key="course.id">
             <td>{{ course.coursename }} </td>
-            <td @click="selectCourse(course)">{{ course.coursecode}} </td>
+            <td>
+            <router-link :to="{ name: 'ACourse', params: { id: course.id }}">
+              {{ course.coursecode }}
+            </router-link>
+            </td>
             <td>{{ course.courseects }} </td>
             <td>{{ course.studentsnumbers }} </td> 
             <td>{{ course.groupsnumbers }}</td>
+            <td :class="{'low-grade': course.groupsnumbers < 21, 'high-grade': course.groupsnumbers >= 21}">{{ course.groupsnumbers }}</td>
+            <td :class="{'low-grade': (course.groupsnumbers + course.groupsnumbers) < 51, 'high-grade': (course.groupsnumbers + course.groupsunmbers) >= 51}">{{ course.exam + course.homeworks }}</td>
 
           </tr>
     </table>

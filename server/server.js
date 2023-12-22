@@ -27,3 +27,18 @@ app.get('/api/courses', async(req, res) => {
     }
 });
 
+app.get('/api/courses/:id', async(req, res) => {
+    try {
+        console.log("A GET request for a specific course has arrived");
+        const { id } = req.params;
+        const course = await pool.query("SELECT * FROM courses WHERE id = $1", [id]);
+        if (course.rows.length === 0) {
+            return res.status(404).send('Course not found');
+        }
+        res.json(course.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
