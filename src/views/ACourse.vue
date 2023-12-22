@@ -10,14 +10,12 @@
       </div>
       <div class="course-detail">
         <label>Number of Groups:</label>
-        <input type="number" v-model="courseDetails.groupsnumbers">
-      </div>
+        <input type="number" v-model="courseDetails.groupsnumbers" :class="{ 'error-input': exceedsGroupLimit }">      </div>
       <div class="course-detail">
         <label>Course Description:</label>
-        <textarea v-model="courseDetails.description"></textarea>
+        <input type="text" v-model="courseDetails.description"> 
       </div>
-      <button type="button" :disabled="exceedsGroupLimit" @click="updateCourseDetails">Update Course</button>
-    </form>
+      <button type="submit" :disabled="exceedsGroupLimit">Update Course</button>    </form>
   </div>
 </template>
 
@@ -119,5 +117,9 @@ export default {
 
 .centered {
   text-align: center;
+}
+
+.error-input {
+  background-color: #ad2c2c; 
 }
 </style>

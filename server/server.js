@@ -19,7 +19,7 @@ app.get('/api/courses', async(req, res) => {
     try {
         console.log("A GET all request has arrived");
         const course = await pool.query(
-            "SELECT * FROM courses"
+            "SELECT * FROM courses ORDER BY id"
         );
         res.json(course.rows);
     } catch (err) {
