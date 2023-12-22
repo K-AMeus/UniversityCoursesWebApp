@@ -1,11 +1,23 @@
 <template>
-  <div class="A Course">
-    <h3>{{ courseDetails.coursename }}</h3>
-    <p>Course Code: {{ courseDetails.coursecode }}</p>
-    <p>ECTS: {{ courseDetails.courseects }}</p>
-
+  <div class="course-container">
+    <div class="course-header">
+      {{ courseDetails.coursename }} - {{ courseDetails.coursecode }} - {{ courseDetails.courseects }} ECTS
+    </div>
+    <div class="course-detail">
+      <label>Max Number of Students:</label>
+      <div class="course-info">{{ courseDetails.studentsnumbers }}</div>
+    </div>
+    <div class="course-detail">
+      <label>Number of Groups:</label>
+      <div class="course-info">{{ courseDetails.groupsnumbers }}</div>
+    </div>
+    <div class="course-detail">
+      <label>Course Description:</label>
+      <div class="course-info">{{ courseDetails.description }}</div>
+    </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -38,5 +50,45 @@ export default {
 </script>
 
 <style scoped>
+.course-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
 
+.course-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.course-detail {
+  margin-bottom: 15px;
+}
+
+.course-detail label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+.course-info {
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  line-height: 1.6; 
+}
+
+.centered {
+  text-align: center;
+}
 </style>
