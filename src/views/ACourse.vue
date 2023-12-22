@@ -1,20 +1,23 @@
 <template>
   <div class="course-container">
-    <div class="course-header">
-      {{ courseDetails.coursename }} - {{ courseDetails.coursecode }} - {{ courseDetails.courseects }} ECTS
-    </div>
-    <div class="course-detail">
-      <label>Max Number of Students:</label>
-      <div class="course-info">{{ courseDetails.studentsnumbers }}</div>
-    </div>
-    <div class="course-detail">
-      <label>Number of Groups:</label>
-      <div class="course-info">{{ courseDetails.groupsnumbers }}</div>
-    </div>
-    <div class="course-detail">
-      <label>Course Description:</label>
-      <div class="course-info">{{ courseDetails.description }}</div>
-    </div>
+    <form @submit.prevent="updateCourseDetails">
+      <div class="course-header">
+        {{ courseDetails.coursename }} - {{ courseDetails.coursecode }} - {{ courseDetails.courseects }} ECTS
+      </div>
+      <div class="course-detail">
+        <label>Max Number of Students:</label>
+        <input type="number" v-model="courseDetails.studentsnumbers">
+      </div>
+      <div class="course-detail">
+        <label>Number of Groups:</label>
+        <input type="number" v-model="courseDetails.groupsnumbers">
+      </div>
+      <div class="course-detail">
+        <label>Course Description:</label>
+        <textarea v-model="courseDetails.description"></textarea>
+      </div>
+      <button type="button" @click="updateCourseDetails">Update Course</button>
+    </form>
   </div>
 </template>
 
@@ -24,7 +27,7 @@ export default {
   name: "ACourse",
   data() {
     return {
-      courseDetails: {} 
+      courseDetails: {}
     };
   },
   methods: {
@@ -41,11 +44,32 @@ export default {
       } catch (error) {
         console.error('Error:', error);
       }
+    },
+
+    async updateCourseDetails() {
+      const courseId = this.$route.params.id;
+      try {
+        const response = await fetch(`http://localhost:3000/api/courses/${courseId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.courseDetails)
+        });
+        if (response.ok) {
+          alert('Course updated successfully');
+          this.$router.push('/Courses'); 
+        } else {
+          console.error('Error updating course:', response.status);
+        }
+      } catch (error) {
+        console.error('Error updating course:', error);
+      }
     }
   },
   mounted() {
-    this.fetchCourseData(); 
-  } 
+    this.fetchCourseData();
+  }
 };
 </script>
 
@@ -85,7 +109,7 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-  line-height: 1.6; 
+  line-height: 1.6;
 }
 
 .centered {

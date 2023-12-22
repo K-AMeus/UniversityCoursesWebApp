@@ -1,31 +1,29 @@
 <template>
   <div>
-<h3> Courses </h3>
+    <h3> Courses </h3>
     <div class="container">
       <table>
-          <tr>
-            <th>Course name</th>
-            <th>code</th>
-            <th>ECTS</th>
-            <th>Max No. of students</th>
-            <th>No. of groups:</th>
-            <th>description</th>
-          </tr>
-          <tr class="item" v-for="course in courses" :key="course.id">
-            <td>{{ course.coursename }} </td>
-            <td>
-            <router-link :to="{ name: 'ACourse', params: { id: course.id }}">
+        <tr>
+          <th>Course name</th>
+          <th>code</th>
+          <th>ECTS</th>
+          <th>Max No. of students</th>
+          <th>No. of groups:</th>
+        </tr>
+        <tr class="item" v-for="course in courses" :key="course.id">
+          <td>{{ course.coursename }} </td>
+          <td>
+            <router-link :to="{ name: 'ACourse', params: { id: course.id } }">
               {{ course.coursecode }}
             </router-link>
-            </td>
-            <td>{{ course.courseects }} </td>
-            <td>{{ course.studentsnumbers }} </td> 
-            <td>{{ course.groupsnumbers }}</td>
-            <td :class="{'low-grade': course.groupsnumbers < 21, 'high-grade': course.groupsnumbers >= 21}">{{ course.groupsnumbers }}</td>
-            <td :class="{'low-grade': (course.groupsnumbers + course.groupsnumbers) < 51, 'high-grade': (course.groupsnumbers + course.groupsunmbers) >= 51}">{{ course.exam + course.homeworks }}</td>
+          </td>
+          <td>{{ course.courseects }} </td>
+          <td>{{ course.studentsnumbers }} </td>
+          <td>{{ course.groupsnumbers }}</td>
 
-          </tr>
-    </table>
+
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -34,9 +32,9 @@
 
 export default {
   name: "Courses",
-    components: {
+  components: {
 
-    },
+  },
   data() {
     return {
       courses: [],
@@ -48,17 +46,16 @@ export default {
         .then((response) => response.json())
         .then((data) => (this.courses = data))
         .catch((err) => console.log(err.message));
-  },
+    },
   },
   mounted() {
     this.fetchRecords();
     console.log("mounted");
-  } 
+  }
 };
 </script>
 
 <style scoped>
-
 h3 {
   text-align: center;
   color: rgb(8, 110, 110);
@@ -67,13 +64,17 @@ h3 {
 h1 {
   font-size: 20px;
 }
+
 th {
-  background: rgb(22, 161, 45);
+  background: rgb(116, 111, 156);
 }
+
 td {
-  background: rgb(228, 192, 186);
+  background: rgb(116, 111, 156);
 }
-th, td {
+
+th,
+td {
   font-size: 15px;
   margin-bottom: 5px;
   padding: 8px 10px;
@@ -89,5 +90,4 @@ th, td {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-</style>
+}</style>
