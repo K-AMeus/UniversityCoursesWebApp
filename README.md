@@ -1,26 +1,9 @@
-# wad2023-exam1-22-12-2023
+# UniveristyCoursesWebApp - University Course Management System
 
-## Project setup
-```
-npm install
-```
+UniversityCoursesWebApp is a web-based application designed to streamline the management and participation of university courses. It enables users to view detailed information about courses, including participant lists, course codes, names, and other relevant details. With robust features allowing for the addition, modification, and deletion of course data, Application also ensures that all changes are reflected in the database in real-time, providing an up-to-date and interactive experience for users.
 
-### Database info
-```
-Complete the information related to your database (db name, password) in the database.js file that is in the ../server directory
-```
+## Technology Stack
 
-### Run the Back-end
-```
-npm run server
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Open Cypress 
-```
-npx cypress open
-```
+- **Frontend:** Vue.js
+- **Backend:** Node.js with Express
+- **Database:** Configured for MongoDB (can be adapted for other databases)
